@@ -4,3 +4,4 @@ backend/db/prode.db
 backend/public/dist/
 frontend/node_modules/
 frontend/dist/
+backend/db/*.db*
