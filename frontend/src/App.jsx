@@ -10,6 +10,7 @@ import MyBets from "./components/MyBets";
 import Admin from "./components/Admin";
 
 export default function App() {
+  const isMobile = useIsMobile(); // must be before any conditional return
   const [user, setUser]         = useState(null);
   const [loading, setLoading]   = useState(true);
   const [matches, setMatches]   = useState([]);
@@ -97,8 +98,6 @@ export default function App() {
   if (!user) {
     return <Login onLogin={handleLogin} />;
   }
-
-  const isMobile = useIsMobile();
 
   const tabs = [
     { key: "fixture", label: "🗓 Fixture & Apuestas", short: "🗓 Fixture" },
