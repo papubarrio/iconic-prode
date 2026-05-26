@@ -60,21 +60,21 @@ export default function PrizePodium() {
           style={{
             display: "flex",
             flexDirection: isMobile ? "column" : "row",
-            alignItems: "flex-end",
+            alignItems: "stretch",
             gap: 14,
             justifyContent: "center",
           }}
         >
-          {prizes.map((prize, index) => (
+          {prizes.map((prize) => (
             <div
               key={prize.rank}
               style={{
                 ...S.card,
                 border: `1px solid ${B.grayBorder}`,
                 padding: 16,
-                minWidth: isMobile ? "auto" : index === 1 ? 290 : 250,
-                maxWidth: isMobile ? "100%" : index === 1 ? 320 : 280,
-                alignSelf: index === 1 ? "flex-start" : "flex-end",
+                flex: isMobile ? "none" : 1,
+                minWidth: isMobile ? "auto" : 260,
+                maxWidth: isMobile ? "100%" : 320,
                 boxShadow: "0 10px 24px rgba(0,0,0,0.08)",
                 display: "flex",
                 flexDirection: "column",
@@ -85,7 +85,7 @@ export default function PrizePodium() {
                 <div style={{ fontSize: 22 }}>{prize.medal}</div>
                 <div style={{ fontWeight: 700, fontSize: 15, color: "#2a2a2a" }}>{prize.title}</div>
               </div>
-              <div style={{ display: "grid", gap: 10 }}>
+              <div style={{ display: "grid", gap: 10, flex: 1 }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                   {prize.images.map(image => (
                     <img
@@ -99,14 +99,6 @@ export default function PrizePodium() {
                 <div style={{ color: B.gray70, fontSize: 13, lineHeight: 1.5 }}>
                   {prize.description}
                 </div>
-                <a
-                  href={prize.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ fontSize: 13, color: B.blue, fontWeight: 700 }}
-                >
-                  Ver producto
-                </a>
               </div>
             </div>
           ))}
