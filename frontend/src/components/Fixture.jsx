@@ -91,7 +91,7 @@ export default function Fixture({ matches, myBets, setMyBets, results }) {
                         value={draftA} onChange={e => setBetDraft(d => ({ ...d, [m.id]: { ...d[m.id], away: e.target.value } }))} />
                       <button style={{ ...S.betBtn(!!myBet), fontSize: 12, padding: "6px 12px" }}
                         onClick={() => saveBet(m.id)} disabled={saving[m.id]}>
-                        {saving[m.id] ? "..." : myBet ? "✓" : "Apostar"}
+                        {saving[m.id] ? "..." : myBet ? "✓" : "Confirmar"}
                       </button>
                     </div>
                   )}
@@ -131,7 +131,7 @@ export default function Fixture({ matches, myBets, setMyBets, results }) {
                     <input type="number" min="0" max="20" style={S.scoreInput} placeholder="0"
                       value={draftA} onChange={e => setBetDraft(d => ({ ...d, [m.id]: { ...d[m.id], away: e.target.value } }))} />
                     <button style={S.betBtn(!!myBet)} onClick={() => saveBet(m.id)} disabled={saving[m.id]}>
-                      {saving[m.id] ? "..." : myBet ? "✓ Guardado" : "Apostar"}
+                      {saving[m.id] ? "..." : myBet ? "✓ Guardado" : "Confirmar"}
                     </button>
                   </div>
                 )}
