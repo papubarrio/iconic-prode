@@ -15,6 +15,7 @@ router.get("/all", requireAuth, async (req, res, next) => {
       SELECT b.user_id, (u.first_name || ' ' || u.last_name) AS display_name,
              b.match_id, b.home_score, b.away_score
       FROM bets b JOIN users u ON u.id = b.user_id
+      WHERE u.hidden_from_leaderboard = 0
     `);
     res.json(rows);
   } catch (e) { next(e); }

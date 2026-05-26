@@ -6,8 +6,24 @@ const { createLead }   = require("../services/zoho");
 
 router.get("/users", requireAdmin, async (req, res, next) => {
   try {
-    const { rows } = await query("SELECT id, email, first_name, last_name, company, is_admin, created_at FROM users ORDER BY created_at");
-    res.json(rows.map(u => ({ ...u, is_admin: !!u.is_admin, display_name: `${u.first_name} ${u.last_name}`.trim() })));
+    const { rows } = await query("SELECT id, email, first_name, last_name, company, is_admin, hidden_from_leaderboard, created_at FROM users ORDER BY created_at");
+    res.json(rows.map(u => ({
+      ...u,
+      is_admin: !!u.is_admin,
+      hidden_from_leaderboard: !!u.hidden_from_leaderboard,
+      display_name: `${u.first_name} ${u.last_name}`.trim()
+    })));
+  } catch (e) { next(e); }
+});
+
+router.put("/users/:id/hidden", requireAdmin, async (req, res, next) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const hidden = req.body.hidden ? 1 : 0;
+    const { rows } = await query("SELECT id FROM users WHERE id = $1", [userId]);
+    if (!rows[0]) return res.status(404).json({ error: "Usuario no encontrado" });
+    await query("UPDATE users SET hidden_from_leaderboard = $1 WHERE id = $2", [hidden, userId]);
+    res.json({ ok: true });
   } catch (e) { next(e); }
 });
 

@@ -40,4 +40,5 @@ export const api = {
   createUser:      (data) => req("POST", "/admin/users", data),
   resetPassword:   (id, password) => req("PUT", `/admin/users/${id}/password`, { password }),
   deleteUser:      (id) => req("DELETE", `/admin/users/${id}`),
+  setUserHidden:   (id, hidden) => req("PUT", `/admin/users/${id}/hidden`, { hidden }),
 };

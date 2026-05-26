@@ -69,6 +69,15 @@ function UserManager() {
     } catch (e) { alert(e.message); }
   };
 
+  const toggleHidden = async (id, hidden) => {
+    try {
+      await api.setUserHidden(id, hidden);
+      setUsers(u => u.map(user => user.id === id ? { ...user, hidden_from_leaderboard: hidden } : user));
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
   return (
     <div style={S.card}>
       <div style={S.cardHeader}>
@@ -125,6 +134,7 @@ function UserManager() {
                 <span style={{ fontSize: 14, color: B.gray50, marginLeft: 8 }}>{u.email}</span>
                 {u.company && <span style={{ fontSize: 14, color: B.gray50, marginLeft: 6 }}>· {u.company}</span>}
                 {u.is_admin && <span style={{ marginLeft: 8, fontSize: 13, background: B.bluePale, color: B.blue, borderRadius: 10, padding: "1px 8px", fontWeight: 700 }}>admin</span>}
+                {u.hidden_from_leaderboard && <span style={{ marginLeft: 8, fontSize: 13, background: "rgba(155,155,155,0.12)", color: B.gray70, borderRadius: 10, padding: "1px 8px", fontWeight: 700 }}>oculto</span>}
               </div>
               <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
                 <input type="password" placeholder="nueva contraseña" style={{ ...S.inputField, marginBottom: 0, width: 160, padding: "6px 10px", fontSize: 14 }}
@@ -132,6 +142,9 @@ function UserManager() {
                   onChange={e => setNewPwd(p => ({ ...p, [u.id]: e.target.value }))} />
                 <button onClick={() => resetPwd(u.id)} style={{ background: B.gold, color: B.white, border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: 14 }}>
                   Reset pwd
+                </button>
+                <button onClick={() => toggleHidden(u.id, !u.hidden_from_leaderboard)} style={{ background: u.hidden_from_leaderboard ? B.blue : B.gray50, color: B.white, border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: 14 }}>
+                  {u.hidden_from_leaderboard ? "Mostrar" : "Ocultar"}
                 </button>
                 <button onClick={() => deleteUser(u.id, u.display_name)} style={{ background: B.red, color: B.white, border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: 14 }}>
                   Eliminar
@@ -165,6 +178,9 @@ export default function Admin({ matches, results, setResults, lastSync, onSync, 
         <div style={{ padding: "16px 20px" }}>
           <p style={{ fontSize: 13, color: B.gray70, marginBottom: 12 }}>
             Los resultados se sincronizan automáticamente cada 5 minutos desde <strong>football-data.org</strong>. También podés forzar la sincronización.
+          </p>
+          <p style={{ fontSize: 13, color: B.gray70, marginBottom: 12 }}>
+            Cualquier cambio manual en resultados recalcula automáticamente los puntos y actualiza la tabla de posiciones.
           </p>
           <button style={{ ...S.primaryBtn, width: "auto", padding: "10px 28px" }} onClick={onSync} disabled={syncing}>
             {syncing ? "Sincronizando..." : "🔄 Sincronizar ahora"}

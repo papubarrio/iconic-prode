@@ -26,6 +26,7 @@ async function initDB() {
       company       TEXT NOT NULL DEFAULT '',
       password_hash TEXT NOT NULL,
       is_admin      INTEGER NOT NULL DEFAULT 0,
+      hidden_from_leaderboard INTEGER NOT NULL DEFAULT 0,
       created_at    TEXT NOT NULL DEFAULT ''
     );
 
@@ -59,6 +60,9 @@ async function initDB() {
       away_code TEXT NOT NULL
     );
   `);
+
+  // Ensure hidden flag exists for users
+  await query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS hidden_from_leaderboard INTEGER NOT NULL DEFAULT 0`);
 
   // Seed admin if no users exist
   const { rows } = await query("SELECT COUNT(*) AS c FROM users");
