@@ -11,7 +11,7 @@ export default function MyBets({ matches, myBets, results, currentUser }) {
 
       {bettedMatches.length === 0 && (
         <div style={{ padding: 32, textAlign: "center", color: B.gray50, fontSize: 14 }}>
-          Todavía no cargaste ninguna apuesta. Andá a la pestaña <strong>Fixture</strong> para apostar.
+          Todavía no cargaste ningún pronóstico. Andá a la pestaña <strong>Fixture y Pronósticos</strong> para cargarlo.
         </div>
       )}
 
