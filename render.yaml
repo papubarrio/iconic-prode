@@ -7,17 +7,10 @@ services:
     startCommand: cd backend && node server.js
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: iconic-prode-db
-          property: connectionString
+        sync: false
       - key: JWT_SECRET
         generateValue: true
       - key: FOOTBALL_API_KEY
         value: 95c8c99cbd564123811bf4397373d2aa
       - key: NODE_ENV
         value: production
-
-databases:
-  - name: iconic-prode-db
-    databaseName: iconic_prode
-    plan: free
