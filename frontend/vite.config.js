@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     // Dev only — proxies /api to the local backend
     proxy: {
-      "/api": "http://localhost:3001",
+      "/api": "http://localhost:3002",
     },
   },
 });
