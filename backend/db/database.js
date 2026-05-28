@@ -70,9 +70,9 @@ async function initDB() {
     const hash = bcrypt.hashSync("admin123", 10);
     await query(
       "INSERT INTO users (email, first_name, last_name, company, password_hash, is_admin, created_at) VALUES ($1,$2,$3,$4,$5,$6,$7)",
-      ["admin@granotec.com", "Admin", "Granotec", "Granotec", hash, 1, new Date().toISOString()]
+      ["admin@iconicworkspaces.com", "Admin", "Iconic", "Iconic Workspaces", hash, 1, new Date().toISOString()]
     );
-    console.log("Admin creado — email: admin@granotec.com, password: admin123 (¡cambialo!)");
+    console.log("Admin created — email: admin@iconicworkspaces.com, password: admin123 (change it!)");
   }
 }
 

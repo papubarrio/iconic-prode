@@ -30,7 +30,7 @@ const PORT = process.env.PORT || 3001;
 initDB()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Granotec Prode running on port ${PORT}`);
+      console.log(`Iconic Workspaces Predictor running on port ${PORT}`);
       if (!process.env.FOOTBALL_API_KEY) console.warn("FOOTBALL_API_KEY not set");
     });
   })
