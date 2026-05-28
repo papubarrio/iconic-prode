@@ -81,7 +81,7 @@ export default function App() {
       const ab = await api.getAllBets().catch(() => []);
       setAllBets(ab);
     } catch (e) {
-      alert("Error al sincronizar: " + e.message);
+      alert("Sync error: " + e.message);
     } finally {
       setSyncing(false);
     }
@@ -91,7 +91,7 @@ export default function App() {
     return (
       <div style={{ minHeight: "100vh", background: B.blue, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
         <GranotecLogo height={32} white />
-        <div style={{ color: B.white, fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: 14, opacity: 0.8 }}>Cargando prode...</div>
+        <div style={{ color: B.white, fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: 14, opacity: 0.8 }}>Loading...</div>
       </div>
     );
   }
@@ -101,9 +101,9 @@ export default function App() {
   }
 
   const tabs = [
-    { key: "fixture", label: "🗓 Fixture y Pronósticos", short: "🗓 Fixture" },
-    { key: "tabla",   label: "🏅 Tabla de posiciones", short: "🏅 Tabla" },
-    { key: "mis",     label: "📋 Mis pronósticos",        short: "📋 Mis" },
+    { key: "fixture", label: "🗓 Fixture & Predictions", short: "🗓 Fixture" },
+    { key: "tabla",   label: "🏅 Leaderboard",           short: "🏅 Board" },
+    { key: "mis",     label: "📋 My Predictions",         short: "📋 Mine" },
     ...(user.is_admin ? [{ key: "admin", label: "⚙ Admin", short: "⚙ Admin" }] : []),
   ];
 
@@ -112,19 +112,19 @@ export default function App() {
       <div style={S.header}>
         <div style={{ ...S.headerInner, padding: isMobile ? "10px 14px" : "14px 24px" }}>
           <div style={S.logoGroup}>
-            <GranotecLogo height={isMobile ? 18 : 28} white />
+            <GranotecLogo height={isMobile ? 22 : 34} white />
             {!isMobile && (
               <>
                 <div style={S.dividerV} />
                 <div>
-                  <div style={S.proDeTitle}>🏆 Prode Mundial 2026</div>
-                  <div style={S.proDeYear}>USA · Canadá · México</div>
+                  <div style={S.proDeTitle}>🏆 World Cup Predictor 2026</div>
+                  <div style={S.proDeYear}>USA · Canada · Mexico</div>
                 </div>
               </>
             )}
             {isMobile && (
               <span style={{ color: "rgba(255,255,255,0.9)", fontWeight: 700, fontSize: 14, marginLeft: 8 }}>
-                🏆 Prode 2026
+                🏆 WC 2026
               </span>
             )}
           </div>
@@ -132,11 +132,11 @@ export default function App() {
             {syncing && !isMobile && <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", fontWeight: 500 }}>🔄</div>}
             {lastSync && !syncing && !isMobile && (
               <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }}>
-                ✓ {new Date(lastSync.includes("Z") || lastSync.includes("+") ? lastSync : lastSync.replace(" ", "T") + "Z").toLocaleTimeString("es-AR", { timeZone: "America/Argentina/Buenos_Aires", hour: "2-digit", minute: "2-digit" })}
+                ✓ {new Date(lastSync.includes("Z") || lastSync.includes("+") ? lastSync : lastSync.replace(" ", "T") + "Z").toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "2-digit", minute: "2-digit" })}
               </div>
             )}
             <div style={{ ...S.playerPill, fontSize: isMobile ? 13 : 15, padding: isMobile ? "5px 10px" : "6px 14px" }}
-              onClick={handleLogout} title="Cerrar sesión">
+              onClick={handleLogout} title="Log out">
               👤 {isMobile ? user.first_name : user.display_name}
             </div>
           </div>
@@ -178,11 +178,11 @@ export default function App() {
         )}
       </div>
 
-      <div style={{ borderTop: `3px solid ${B.blue}`, background: B.white, padding: "16px 24px", textAlign: "center" }}>
+      <div style={{ borderTop: `3px solid ${B.blueLight}`, background: B.white, padding: "16px 24px", textAlign: "center" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
           <GranotecLogo height={20} />
           <span style={{ fontSize: 13, color: B.gray50, fontWeight: 500, letterSpacing: 1, textTransform: "uppercase" }}>
-            Prode Mundial 2026 · Nutrición y Biociencia para un Mundo Mejor
+            World Cup Predictor 2026 · Empowering Businesses to Thrive
           </span>
         </div>
       </div>

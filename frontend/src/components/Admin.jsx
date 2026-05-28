@@ -25,7 +25,7 @@ function ManualResult({ match, current, onSave }) {
       <input type="number" min="0" max="20" style={{ ...S.scoreInput, width: 40 }}
         value={a} onChange={e => setA(e.target.value)} />
       <button style={S.betBtn(!!current)} onClick={save} disabled={saving}>
-        {saving ? "..." : current ? "Actualizar" : "Guardar"}
+        {saving ? "..." : current ? "Update" : "Save"}
       </button>
     </div>
   );
@@ -55,17 +55,17 @@ function UserManager() {
   };
 
   const deleteUser = async (id, name) => {
-    if (!confirm(`¿Eliminar usuario "${name}"?`)) return;
+    if (!confirm(`Delete user "${name}"?`)) return;
     try { await api.deleteUser(id); await loadUsers(); } catch (e) { alert(e.message); }
   };
 
   const resetPwd = async (id) => {
     const pwd = newPwd[id];
-    if (!pwd || pwd.length < 6) { alert("Contraseña mín. 6 caracteres"); return; }
+    if (!pwd || pwd.length < 6) { alert("Password must be at least 6 characters"); return; }
     try {
       await api.resetPassword(id, pwd);
       setNewPwd(p => ({ ...p, [id]: "" }));
-      alert("Contraseña actualizada");
+      alert("Password updated");
     } catch (e) { alert(e.message); }
   };
 
@@ -81,29 +81,29 @@ function UserManager() {
   return (
     <div style={S.card}>
       <div style={S.cardHeader}>
-        <span style={S.cardHeaderTitle}>Gestión de usuarios</span>
+        <span style={S.cardHeaderTitle}>User Management</span>
         <button onClick={loadUsers} style={{ marginLeft: "auto", background: "rgba(255,255,255,0.15)", border: "none", borderRadius: 6, color: B.white, padding: "4px 12px", cursor: "pointer", fontSize: 14, fontFamily: "'Montserrat',sans-serif", fontWeight: 600 }}>
-          {loading ? "Cargando..." : users ? "Recargar" : "Ver usuarios"}
+          {loading ? "Loading..." : users ? "Refresh" : "View users"}
         </button>
       </div>
 
       <div style={{ padding: "16px 20px", borderBottom: `1px solid ${B.grayBorder}` }}>
-        <div style={{ fontWeight: 700, fontSize: 13, color: B.gray70, marginBottom: 12, textTransform: "uppercase", letterSpacing: 0.5 }}>Nuevo usuario</div>
+        <div style={{ fontWeight: 700, fontSize: 13, color: B.gray70, marginBottom: 12, textTransform: "uppercase", letterSpacing: 0.5 }}>New User</div>
         {error && <div style={S.errorMsg}>{error}</div>}
         <form onSubmit={createUser} style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "flex-end" }}>
           <div>
-            <label style={{ ...S.label, marginBottom: 4 }}>Nombre</label>
-            <input style={{ ...S.inputField, marginBottom: 0, width: 130 }} placeholder="Juan"
+            <label style={{ ...S.label, marginBottom: 4 }}>First Name</label>
+            <input style={{ ...S.inputField, marginBottom: 0, width: 130 }} placeholder="John"
               value={form.first_name} onChange={e => setForm(f => ({ ...f, first_name: e.target.value }))} />
           </div>
           <div>
-            <label style={{ ...S.label, marginBottom: 4 }}>Apellido</label>
-            <input style={{ ...S.inputField, marginBottom: 0, width: 130 }} placeholder="García"
+            <label style={{ ...S.label, marginBottom: 4 }}>Last Name</label>
+            <input style={{ ...S.inputField, marginBottom: 0, width: 130 }} placeholder="Smith"
               value={form.last_name} onChange={e => setForm(f => ({ ...f, last_name: e.target.value }))} />
           </div>
           <div>
-            <label style={{ ...S.label, marginBottom: 4 }}>Empresa</label>
-            <input style={{ ...S.inputField, marginBottom: 0, width: 160 }} placeholder="Empresa S.A."
+            <label style={{ ...S.label, marginBottom: 4 }}>Company</label>
+            <input style={{ ...S.inputField, marginBottom: 0, width: 160 }} placeholder="Company Inc."
               value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
           </div>
           <div>
@@ -112,8 +112,8 @@ function UserManager() {
               value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
           </div>
           <div>
-            <label style={{ ...S.label, marginBottom: 4 }}>Contraseña</label>
-            <input type="password" style={{ ...S.inputField, marginBottom: 0, width: 130 }} placeholder="mín. 6 chars"
+            <label style={{ ...S.label, marginBottom: 4 }}>Password</label>
+            <input type="password" style={{ ...S.inputField, marginBottom: 0, width: 130 }} placeholder="min. 6 chars"
               value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} />
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 6, paddingBottom: 2 }}>
@@ -121,7 +121,7 @@ function UserManager() {
               onChange={e => setForm(f => ({ ...f, is_admin: e.target.checked }))} />
             <label htmlFor="is_admin" style={{ fontSize: 13, color: B.gray70, cursor: "pointer" }}>Admin</label>
           </div>
-          <button type="submit" style={{ ...S.primaryBtn, width: "auto", padding: "10px 20px" }}>Crear</button>
+          <button type="submit" style={{ ...S.primaryBtn, width: "auto", padding: "10px 20px" }}>Create</button>
         </form>
       </div>
 
@@ -134,20 +134,20 @@ function UserManager() {
                 <span style={{ fontSize: 14, color: B.gray50, marginLeft: 8 }}>{u.email}</span>
                 {u.company && <span style={{ fontSize: 14, color: B.gray50, marginLeft: 6 }}>· {u.company}</span>}
                 {u.is_admin && <span style={{ marginLeft: 8, fontSize: 13, background: B.bluePale, color: B.blue, borderRadius: 10, padding: "1px 8px", fontWeight: 700 }}>admin</span>}
-                {u.hidden_from_leaderboard && <span style={{ marginLeft: 8, fontSize: 13, background: "rgba(155,155,155,0.12)", color: B.gray70, borderRadius: 10, padding: "1px 8px", fontWeight: 700 }}>oculto</span>}
+                {u.hidden_from_leaderboard && <span style={{ marginLeft: 8, fontSize: 13, background: "rgba(155,155,155,0.12)", color: B.gray70, borderRadius: 10, padding: "1px 8px", fontWeight: 700 }}>hidden</span>}
               </div>
               <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                <input type="password" placeholder="nueva contraseña" style={{ ...S.inputField, marginBottom: 0, width: 160, padding: "6px 10px", fontSize: 14 }}
+                <input type="password" placeholder="new password" style={{ ...S.inputField, marginBottom: 0, width: 160, padding: "6px 10px", fontSize: 14 }}
                   value={newPwd[u.id] || ""}
                   onChange={e => setNewPwd(p => ({ ...p, [u.id]: e.target.value }))} />
                 <button onClick={() => resetPwd(u.id)} style={{ background: B.gold, color: B.white, border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: 14 }}>
                   Reset pwd
                 </button>
                 <button onClick={() => toggleHidden(u.id, !u.hidden_from_leaderboard)} style={{ background: u.hidden_from_leaderboard ? B.blue : B.gray50, color: B.white, border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: 14 }}>
-                  {u.hidden_from_leaderboard ? "Mostrar" : "Ocultar"}
+                  {u.hidden_from_leaderboard ? "Show" : "Hide"}
                 </button>
                 <button onClick={() => deleteUser(u.id, u.display_name)} style={{ background: B.red, color: B.white, border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: 14 }}>
-                  Eliminar
+                  Delete
                 </button>
               </div>
             </div>
@@ -173,21 +173,21 @@ export default function Admin({ matches, results, setResults, lastSync, onSync, 
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       <div style={S.card}>
         <div style={S.cardHeader}>
-          <span style={S.cardHeaderTitle}>Panel de resultados</span>
+          <span style={S.cardHeaderTitle}>Results Panel</span>
         </div>
         <div style={{ padding: "16px 20px" }}>
           <p style={{ fontSize: 13, color: B.gray70, marginBottom: 12 }}>
-            Los resultados se sincronizan automáticamente cada 5 minutos desde <strong>football-data.org</strong>. También podés forzar la sincronización.
+            Results sync automatically every 5 minutes from <strong>football-data.org</strong>. You can also force a sync manually.
           </p>
           <p style={{ fontSize: 13, color: B.gray70, marginBottom: 12 }}>
-            Cualquier cambio manual en resultados recalcula automáticamente los puntos y actualiza la tabla de posiciones.
+            Any manual result change automatically recalculates scores and updates the leaderboard.
           </p>
           <button style={{ ...S.primaryBtn, width: "auto", padding: "10px 28px" }} onClick={onSync} disabled={syncing}>
-            {syncing ? "Sincronizando..." : "🔄 Sincronizar ahora"}
+            {syncing ? "Syncing..." : "🔄 Sync Now"}
           </button>
           {lastSync && (
             <div style={{ marginTop: 10, fontSize: 14, color: B.gray50 }}>
-              Última sincronización: {fmtDateTime(lastSync.includes("Z") || lastSync.includes("+") ? lastSync : lastSync.replace(" ", "T") + "Z")}
+              Last sync: {fmtDateTime(lastSync.includes("Z") || lastSync.includes("+") ? lastSync : lastSync.replace(" ", "T") + "Z")}
             </div>
           )}
         </div>
@@ -195,11 +195,11 @@ export default function Admin({ matches, results, setResults, lastSync, onSync, 
 
       <div style={S.card}>
         <div style={S.cardHeader}>
-          <span style={S.cardHeaderTitle}>Carga manual de resultados</span>
+          <span style={S.cardHeaderTitle}>Manual Results Entry</span>
         </div>
         {lockedMatches.length === 0 && (
           <div style={{ padding: 24, textAlign: "center", color: B.gray50, fontSize: 13 }}>
-            Aún no hay partidos finalizados para cargar.
+            No finished matches to enter yet.
           </div>
         )}
         {lockedMatches.map(m => {

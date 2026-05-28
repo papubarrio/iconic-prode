@@ -3,7 +3,7 @@ import { S, B } from "../styles";
 import { api, setToken } from "../api";
 import GranotecLogo from "./GranotecLogo";
 
-// Generate falling soccer balls once per mount
+// Generate floating soccer balls once per mount
 function FallingBalls() {
   const balls = useMemo(() => {
     return Array.from({ length: 18 }, (_, i) => ({
@@ -92,14 +92,14 @@ export default function Login({ onLogin }) {
 
         {/* Logo */}
         <div style={S.loginLogoRow}>
-          <GranotecLogo height={36} />
+          <GranotecLogo height={44} />
         </div>
 
-        {/* Title — Montserrat Black, large, tight tracking */}
+        {/* Title */}
         <div style={{
           fontFamily:    "'Montserrat', sans-serif",
           fontWeight:    900,
-          fontSize:      52,
+          fontSize:      46,
           lineHeight:    1,
           letterSpacing: -2,
           color:         B.blue,
@@ -107,11 +107,11 @@ export default function Login({ onLogin }) {
           textAlign:     "center",
           marginBottom:  6,
         }}>
-          Prode<br />2026
+          World Cup<br />Predictor
         </div>
 
         <div style={{ ...S.loginSub, marginBottom: 28 }}>
-          Copa Mundial · USA · Canadá · México
+          FIFA World Cup 2026 · USA · Canada · Mexico
         </div>
 
         {error && <div style={S.errorMsg}>{error}</div>}
@@ -119,22 +119,22 @@ export default function Login({ onLogin }) {
         {mode === "login" ? (
           <form onSubmit={handleLogin}>
             <label style={S.label}>Email</label>
-            <input style={inputStyle} type="email" placeholder="tu@empresa.com" autoComplete="email"
+            <input style={inputStyle} type="email" placeholder="you@company.com" autoComplete="email"
               value={loginForm.email} onChange={e => setLoginForm(f => ({ ...f, email: e.target.value }))} />
 
-            <label style={S.label}>Contraseña</label>
+            <label style={S.label}>Password</label>
             <input style={{ ...inputStyle, marginBottom: 24 }} type="password" placeholder="••••••••" autoComplete="current-password"
               value={loginForm.password} onChange={e => setLoginForm(f => ({ ...f, password: e.target.value }))} />
 
             <button style={{ ...S.primaryBtn, opacity: loading ? 0.7 : 1 }} type="submit" disabled={loading}>
-              {loading ? "Ingresando..." : "Entrar al Prode →"}
+              {loading ? "Signing in..." : "Enter Predictor →"}
             </button>
 
             <div style={{ marginTop: 20, textAlign: "center", fontSize: 13, color: B.gray50 }}>
-              ¿Primera vez?{" "}
+              First time here?{" "}
               <span style={{ color: B.blue, fontWeight: 700, cursor: "pointer" }}
                 onClick={() => { setMode("register"); setError(""); }}>
-                Registrate aquí
+                Create an account
               </span>
             </div>
           </form>
@@ -142,38 +142,38 @@ export default function Login({ onLogin }) {
           <form onSubmit={handleRegister}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
               <div>
-                <label style={S.label}>Nombre</label>
-                <input style={inputStyle} placeholder="Juan" autoComplete="given-name"
+                <label style={S.label}>First Name</label>
+                <input style={inputStyle} placeholder="John" autoComplete="given-name"
                   value={regForm.first_name} onChange={e => setRegForm(f => ({ ...f, first_name: e.target.value }))} />
               </div>
               <div>
-                <label style={S.label}>Apellido</label>
-                <input style={inputStyle} placeholder="García" autoComplete="family-name"
+                <label style={S.label}>Last Name</label>
+                <input style={inputStyle} placeholder="Smith" autoComplete="family-name"
                   value={regForm.last_name} onChange={e => setRegForm(f => ({ ...f, last_name: e.target.value }))} />
               </div>
             </div>
 
-            <label style={S.label}>Empresa</label>
-            <input style={inputStyle} placeholder="Nombre de tu empresa" autoComplete="organization"
+            <label style={S.label}>Company</label>
+            <input style={inputStyle} placeholder="Your company name" autoComplete="organization"
               value={regForm.company} onChange={e => setRegForm(f => ({ ...f, company: e.target.value }))} />
 
             <label style={S.label}>Email</label>
-            <input style={inputStyle} type="email" placeholder="tu@empresa.com" autoComplete="email"
+            <input style={inputStyle} type="email" placeholder="you@company.com" autoComplete="email"
               value={regForm.email} onChange={e => setRegForm(f => ({ ...f, email: e.target.value }))} />
 
-            <label style={S.label}>Contraseña</label>
-            <input style={{ ...inputStyle, marginBottom: 24 }} type="password" placeholder="Mínimo 6 caracteres" autoComplete="new-password"
+            <label style={S.label}>Password</label>
+            <input style={{ ...inputStyle, marginBottom: 24 }} type="password" placeholder="At least 6 characters" autoComplete="new-password"
               value={regForm.password} onChange={e => setRegForm(f => ({ ...f, password: e.target.value }))} />
 
             <button style={{ ...S.primaryBtn, opacity: loading ? 0.7 : 1 }} type="submit" disabled={loading}>
-              {loading ? "Registrando..." : "Crear cuenta →"}
+              {loading ? "Creating account..." : "Create Account →"}
             </button>
 
             <div style={{ marginTop: 20, textAlign: "center", fontSize: 13, color: B.gray50 }}>
-              ¿Ya tenés cuenta?{" "}
+              Already have an account?{" "}
               <span style={{ color: B.blue, fontWeight: 700, cursor: "pointer" }}
                 onClick={() => { setMode("login"); setError(""); }}>
-                Ingresá aquí
+                Sign in here
               </span>
             </div>
           </form>

@@ -6,12 +6,12 @@ export default function MyBets({ matches, myBets, results, currentUser }) {
   return (
     <div style={S.card}>
       <div style={S.cardHeader}>
-        <span style={S.cardHeaderTitle}>Apuestas de {currentUser.display_name}</span>
+        <span style={S.cardHeaderTitle}>Predictions by {currentUser.display_name}</span>
       </div>
 
       {bettedMatches.length === 0 && (
         <div style={{ padding: 32, textAlign: "center", color: B.gray50, fontSize: 14 }}>
-          Todavía no cargaste ningún pronóstico. Andá a la pestaña <strong>Fixture y Pronósticos</strong> para cargarlo.
+          You haven't submitted any predictions yet. Go to the <strong>Fixture &amp; Predictions</strong> tab to get started.
         </div>
       )}
 
@@ -38,14 +38,14 @@ export default function MyBets({ matches, myBets, results, currentUser }) {
             </div>
             {result ? (
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <div style={{ fontSize: 14, color: B.gray50 }}>Real: {result.home_score}–{result.away_score}</div>
+                <div style={{ fontSize: 14, color: B.gray50 }}>Result: {result.home_score}–{result.away_score}</div>
                 <div style={S.ptsTag(pts ?? -1)}>
                   {pts === 3 ? "🎯 +3" : pts === 1 ? "✓ +1" : "✗ 0"}
                 </div>
               </div>
             ) : (
               <div style={{ fontSize: 14, color: B.gray50, fontWeight: 500, background: B.grayLight, borderRadius: 6, padding: "4px 10px" }}>
-                Pendiente
+                Pending
               </div>
             )}
           </div>

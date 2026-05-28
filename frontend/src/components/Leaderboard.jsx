@@ -25,15 +25,15 @@ export default function Leaderboard({ allBets, results, currentUser }) {
   return (
     <div style={S.card}>
       <div style={S.cardHeader}>
-        <span style={S.cardHeaderTitle}>Tabla de posiciones</span>
+        <span style={S.cardHeaderTitle}>Leaderboard</span>
         <span style={{ marginLeft: "auto", fontSize: 13, color: "rgba(255,255,255,0.65)" }}>
-          {board.length} participantes
+          {board.length} players
         </span>
       </div>
 
       {board.length === 0 && (
         <div style={{ padding: 32, textAlign: "center", color: B.gray50, fontSize: 14 }}>
-          Todavía no hay resultados confirmados. ¡Las posiciones aparecerán al cierre de los primeros partidos!
+          No confirmed results yet. The leaderboard will appear after the first matches are finalized!
         </div>
       )}
 
@@ -47,11 +47,11 @@ export default function Leaderboard({ allBets, results, currentUser }) {
           <div style={{ ...S.playerName, fontSize: isMobile ? 13 : 15 }}>
             {p.display_name}
             {p.uid === currentUser.id && (
-              <span style={{ fontSize: 12, color: B.blue, fontWeight: 700, marginLeft: 6, background: B.bluePale, borderRadius: 10, padding: "1px 7px" }}>vos</span>
+              <span style={{ fontSize: 12, color: B.blue, fontWeight: 700, marginLeft: 6, background: B.bluePale, borderRadius: 10, padding: "1px 7px" }}>you</span>
             )}
             {isMobile && (
               <div style={{ fontSize: 12, color: B.gray50, marginTop: 2 }}>
-                🎯 {p.exact} · ✓ {p.winner}
+                🎯 {p.exact} exact · ✓ {p.winner}
               </div>
             )}
           </div>
@@ -62,7 +62,7 @@ export default function Leaderboard({ allBets, results, currentUser }) {
             </div>
             {!isMobile && (
               <div style={{ fontSize: 13, color: B.gray50, marginTop: 2 }}>
-                🎯 {p.exact} exactos · ✓ {p.winner} ganadores
+                🎯 {p.exact} exact · ✓ {p.winner} correct
               </div>
             )}
           </div>
@@ -71,9 +71,9 @@ export default function Leaderboard({ allBets, results, currentUser }) {
 
       {board.length > 0 && (
         <div style={{ padding: "12px 20px", background: B.bluePale, display: "flex", gap: 20, flexWrap: "wrap" }}>
-          <div style={{ fontSize: 14, color: B.blue, fontWeight: 600 }}>🎯 Resultado exacto = <strong>3 pts</strong></div>
-          <div style={{ fontSize: 14, color: B.blue, fontWeight: 600 }}>✓ Ganador/empate correcto = <strong>1 pt</strong></div>
-          <div style={{ fontSize: 14, color: B.blue, fontWeight: 600 }}>✗ Incorrecto = <strong>0 pts</strong></div>
+          <div style={{ fontSize: 14, color: B.blue, fontWeight: 600 }}>🎯 Exact score = <strong>3 pts</strong></div>
+          <div style={{ fontSize: 14, color: B.blue, fontWeight: 600 }}>✓ Correct winner/draw = <strong>1 pt</strong></div>
+          <div style={{ fontSize: 14, color: B.blue, fontWeight: 600 }}>✗ Wrong = <strong>0 pts</strong></div>
         </div>
       )}
     </div>

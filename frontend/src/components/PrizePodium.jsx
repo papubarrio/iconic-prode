@@ -1,45 +1,27 @@
 import { S, B } from "../styles";
 import { useIsMobile } from "../hooks";
-import camiseta from "../assets/Camiseta_Titular_de_la_Seleccion_Argentina_26_Blanco_JM5900_21_model.avif";
-import pelota from "../assets/Pelota_Trionda_League_Copa_Mundial_de_la_FIFA_26tm_Blanco_JD8030_01_00_standard.avif";
-import champagne from "../assets/salentein-brut-nature.webp";
-import reserva from "../assets/salentein-reserva.webp";
-import mateSet from "../assets/set-matero.webp";
-import vinoPortillo from "../assets/vino-portillo.webp";
 
 const prizes = [
   {
     rank: 1,
     medal: "🥇",
-    title: "1er puesto",
-    description: "Camiseta original titular de la Selección Argentina + Caja de Champagne Salentein Brut Nature.",
-    link: "https://www.adidas.com.ar/camiseta-titular-de-la-seleccion-argentina-26/JM5900.html",
-    images: [
-      { src: camiseta, alt: "Camiseta Argentina" },
-      { src: champagne, alt: "Champagne Salentein" },
-    ],
+    title: "1st Place",
+    description: "TBD — Stay tuned for an amazing prize!",
+    images: [],
   },
   {
     rank: 2,
     medal: "🥈",
-    title: "2do puesto",
-    description: "Pelota de fútbol Trionda de la Copa del Mundo + Caja de vino Salentein Reserva.",
-    link: "https://www.adidas.com.ar/pelota-trionda-league-copa-mundial-de-la-fifa-26/JD8030.html",
-    images: [
-      { src: pelota, alt: "Pelota Trionda" },
-      { src: reserva, alt: "Vino Salentein Reserva" },
-    ],
+    title: "2nd Place",
+    description: "TBD — Stay tuned for an amazing prize!",
+    images: [],
   },
   {
     rank: 3,
     medal: "🥉",
-    title: "3er puesto",
-    description: "Set de mate + Caja de Vino El Portillo.",
-    link: "https://www.mercadolibre.com.ar/set-matero-termo-mate-y-bombilla-ozz-color-negro/p/MLA65933359?pdp_filters=item_id:MLA2901055438#is_advertising=true&searchVariation=MLA65933359&backend_model=search-backend&be_origin=backend&position=1&search_layout=grid&type=pad&tracking_id=25eddca5-4e63-863b-f1c499ccb7bd&ad_domain=VQCATCORE_LST&ad_position=1&ad_click_id=MGM0MTVhZDUtZDZhYi00YjdiLWI3ZjItYTk5NDM4MjA2YWUz",
-    images: [
-      { src: mateSet, alt: "Set de mate" },
-      { src: vinoPortillo, alt: "Vino El Portillo" },
-    ],
+    title: "3rd Place",
+    description: "TBD — Stay tuned for an amazing prize!",
+    images: [],
   },
 ];
 
@@ -49,11 +31,11 @@ export default function PrizePodium() {
   return (
     <div style={{ ...S.card, marginBottom: 20 }}>
       <div style={S.cardHeader}>
-        <span style={S.cardHeaderTitle}>Premios</span>
+        <span style={S.cardHeaderTitle}>Prizes</span>
       </div>
       <div style={{ padding: "20px", display: "grid", gap: 18 }}>
         <div style={{ color: B.gray70, fontSize: 13, lineHeight: 1.6 }}>
-          El podio final entrega premios especiales a los 3 mejores pronosticadores. Cada puesto incluye dos productos destacados para vivir la Copa con estilo.
+          The top 3 predictors at the end of the tournament win special prizes. Stay tuned for the full prize reveal!
         </div>
 
         <div
@@ -70,35 +52,23 @@ export default function PrizePodium() {
               key={prize.rank}
               style={{
                 ...S.card,
-                border: `1px solid ${B.grayBorder}`,
+                border: `2px solid ${prize.rank === 1 ? B.gold : prize.rank === 2 ? B.blueLight : B.grayBorder}`,
                 padding: 16,
                 flex: isMobile ? "none" : 1,
-                minWidth: isMobile ? "auto" : 260,
-                maxWidth: isMobile ? "100%" : 320,
+                minWidth: isMobile ? "auto" : 200,
+                maxWidth: isMobile ? "100%" : 300,
                 boxShadow: "0 10px 24px rgba(0,0,0,0.08)",
                 display: "flex",
                 flexDirection: "column",
-                gap: 14,
+                gap: 10,
+                alignItems: "center",
+                textAlign: "center",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <div style={{ fontSize: 22 }}>{prize.medal}</div>
-                <div style={{ fontWeight: 700, fontSize: 15, color: "#2a2a2a" }}>{prize.title}</div>
-              </div>
-              <div style={{ display: "grid", gap: 10, flex: 1 }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                  {prize.images.map(image => (
-                    <img
-                      key={image.alt}
-                      src={image.src}
-                      alt={image.alt}
-                      style={{ width: "100%", height: 124, objectFit: "cover", borderRadius: 14, background: B.grayLight }}
-                    />
-                  ))}
-                </div>
-                <div style={{ color: B.gray70, fontSize: 13, lineHeight: 1.5 }}>
-                  {prize.description}
-                </div>
+              <div style={{ fontSize: 36 }}>{prize.medal}</div>
+              <div style={{ fontWeight: 700, fontSize: 15, color: "#2a2a2a" }}>{prize.title}</div>
+              <div style={{ color: B.gray70, fontSize: 13, lineHeight: 1.5 }}>
+                {prize.description}
               </div>
             </div>
           ))}

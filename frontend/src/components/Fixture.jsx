@@ -23,7 +23,7 @@ export default function Fixture({ matches, myBets, setMyBets, results }) {
         return [...without, { match_id: matchId, home_score: parseInt(draft.home), away_score: parseInt(draft.away) }];
       });
     } catch (e) {
-      alert("Error al guardar: " + e.message);
+      alert("Error saving: " + e.message);
     } finally {
       setSaving(s => ({ ...s, [matchId]: false }));
     }
@@ -42,7 +42,7 @@ export default function Fixture({ matches, myBets, setMyBets, results }) {
           <div style={S.cardHeader}>
             <span style={S.cardHeaderTitle}>{group}</span>
             <span style={{ marginLeft: "auto", fontSize: 13, color: "rgba(255,255,255,0.65)", fontWeight: 500 }}>
-              {gMatches.filter(m => !isLocked(m)).length} pendientes
+              {gMatches.filter(m => !isLocked(m)).length} open
             </span>
           </div>
           {gMatches.map(m => {
@@ -80,7 +80,7 @@ export default function Fixture({ matches, myBets, setMyBets, results }) {
                     </div>
                   ) : locked ? (
                     <div style={{ fontSize: 12, color: B.gray50, fontWeight: 500, background: B.grayLight, borderRadius: 6, padding: "5px 10px", display: "inline-block" }}>
-                      {myBet ? `Mi apuesta: ${myBet.home_score}–${myBet.away_score}` : "Cerrado"}
+                      {myBet ? `My pick: ${myBet.home_score}–${myBet.away_score}` : "Locked"}
                     </div>
                   ) : (
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -91,7 +91,7 @@ export default function Fixture({ matches, myBets, setMyBets, results }) {
                         value={draftA} onChange={e => setBetDraft(d => ({ ...d, [m.id]: { ...d[m.id], away: e.target.value } }))} />
                       <button style={{ ...S.betBtn(!!myBet), fontSize: 12, padding: "6px 12px" }}
                         onClick={() => saveBet(m.id)} disabled={saving[m.id]}>
-                        {saving[m.id] ? "..." : myBet ? "✓" : "Confirmar"}
+                        {saving[m.id] ? "..." : myBet ? "✓" : "Confirm"}
                       </button>
                     </div>
                   )}
@@ -121,7 +121,7 @@ export default function Fixture({ matches, myBets, setMyBets, results }) {
                   </div>
                 ) : locked ? (
                   <div style={{ fontSize: 14, color: B.gray50, fontWeight: 500, background: B.grayLight, borderRadius: 6, padding: "6px 12px" }}>
-                    {myBet ? `Mi apuesta: ${myBet.home_score}–${myBet.away_score}` : "Cerrado"}
+                    {myBet ? `My pick: ${myBet.home_score}–${myBet.away_score}` : "Locked"}
                   </div>
                 ) : (
                   <div style={S.betInputGroup}>
@@ -131,7 +131,7 @@ export default function Fixture({ matches, myBets, setMyBets, results }) {
                     <input type="number" min="0" max="20" style={S.scoreInput} placeholder="-"
                       value={draftA} onChange={e => setBetDraft(d => ({ ...d, [m.id]: { ...d[m.id], away: e.target.value } }))} />
                     <button style={S.betBtn(!!myBet)} onClick={() => saveBet(m.id)} disabled={saving[m.id]}>
-                      {saving[m.id] ? "..." : myBet ? "✓ Guardado" : "Confirmar"}
+                      {saving[m.id] ? "..." : myBet ? "✓ Saved" : "Confirm"}
                     </button>
                   </div>
                 )}
