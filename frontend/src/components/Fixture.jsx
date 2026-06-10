@@ -37,6 +37,13 @@ export default function Fixture({ matches, myBets, setMyBets, results }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      <div style={{ ...S.card, padding: "12px 20px", background: B.bluePale, border: "none" }}>
+        <div style={{ fontSize: 14, color: B.blue, fontWeight: 600, lineHeight: 1.6 }}>
+          ⏰ Predictions for each match lock <strong>1 hour before kickoff</strong> — make sure to submit your picks before then.
+          <br />
+          🗂 Matches are organized <strong>by group</strong>: be sure to place your bets for every match in each group before its corresponding dates.
+        </div>
+      </div>
       {Object.entries(grouped).map(([group, gMatches]) => (
         <div key={group} style={S.card}>
           <div style={S.cardHeader}>

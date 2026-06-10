@@ -8,7 +8,6 @@ import Fixture from "./components/Fixture";
 import Leaderboard from "./components/Leaderboard";
 import MyBets from "./components/MyBets";
 import Admin from "./components/Admin";
-import PrizePodium from "./components/PrizePodium";
 
 export default function App() {
   const isMobile = useIsMobile(); // must be before any conditional return
@@ -155,10 +154,7 @@ export default function App() {
         </div>
 
         {tab === "fixture" && (
-          <>
-            <PrizePodium />
-            <Fixture matches={matches} myBets={myBets} setMyBets={setMyBets} results={results} />
-          </>
+          <Fixture matches={matches} myBets={myBets} setMyBets={setMyBets} results={results} />
         )}
         {tab === "tabla" && (
           <Leaderboard allBets={allBets} results={results} currentUser={user} />
