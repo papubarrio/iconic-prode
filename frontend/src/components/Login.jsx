@@ -110,8 +110,28 @@ export default function Login({ onLogin }) {
           World Cup<br />Predictor
         </div>
 
-        <div style={{ ...S.loginSub, marginBottom: 28 }}>
+        <div style={{ ...S.loginSub, marginBottom: 20 }}>
           FIFA World Cup 2026 · USA · Canada · Mexico
+        </div>
+
+        {/* Info notice for portal members */}
+        <div style={{
+          background: "#eaf6fb",
+          border: `1px solid ${B.blueLight}`,
+          borderRadius: 8,
+          padding: "10px 14px",
+          fontSize: 12,
+          color: B.gray70,
+          lineHeight: 1.5,
+          marginBottom: 20,
+          display: "flex",
+          gap: 8,
+          alignItems: "flex-start",
+        }}>
+          <span style={{ fontSize: 15, marginTop: 1, flexShrink: 0 }}>ℹ️</span>
+          <span>
+            <strong>This is a separate account.</strong> Please register with the same email you use in the Iconic portal so we can identify you.
+          </span>
         </div>
 
         {error && <div style={S.errorMsg}>{error}</div>}

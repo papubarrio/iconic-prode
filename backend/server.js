@@ -16,7 +16,7 @@ app.use("/api/admin",   require("./routes/admin"));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: "Error interno del servidor" });
+  res.status(500).json({ error: "Internal server error" });
 });
 
 const DIST = path.join(__dirname, "public", "dist");
